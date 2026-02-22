@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Aluno {
+  id         Int       @id
+  nome       String?   @db.VarChar
+  cursoId    Int?
+  created_at DateTime? @db.Timestamp(6)
+  Curso      Curso?    @relation(fields: [cursoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Curso {
+  id         Int       @id
+  nome       String?   @db.VarChar
+  duracao    Int?
+  created_at DateTime? @db.Timestamp(6)
+  Aluno      Aluno[]
+}

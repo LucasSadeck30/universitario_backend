@@ -1,0 +1,16 @@
+#container_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#botao_cadastro{
+        margin: 30px;
+    padding: 29px;
+    width: 250px;
+    height: 30px;
+    align-items: center;
+}

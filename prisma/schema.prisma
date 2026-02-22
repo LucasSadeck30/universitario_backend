@@ -1,0 +1,29 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Aluno {
+  id         Int       @id @default(autoincrement())
+  nome       String?   @db.VarChar
+  cursoId    Int?
+  created_at DateTime? @db.Timestamp(6)
+  imagem     String?   @db.VarChar(255)
+  senha      String?   @db.VarChar(255)
+  email      String?   @db.VarChar(255)
+  Curso      Curso?    @relation(fields: [cursoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Curso {
+  id         Int       @id @default(autoincrement())
+  nome       String?   @db.VarChar
+  duracao    Int?
+  created_at DateTime? @db.Timestamp(6)
+  descricao  String?   @db.VarChar(255)
+  imagem     String?   @db.VarChar(255)
+  Aluno      Aluno[]
+}
