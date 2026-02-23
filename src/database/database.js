@@ -8,7 +8,10 @@ const { Pool } = require('pg');
 
 // Usar connectionString que já está funcionando!
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 const adapter = new PrismaPg(pool);
