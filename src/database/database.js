@@ -1,17 +1,15 @@
 require('dotenv').config({ override: false });
 
 const { PrismaClient } = require('@prisma/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
+const { Pool } = require('pg');
 
-const prisma = new PrismaClient();
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
 
-async function testar_conexao() {
-    prisma.$connect().then(() => {
-        console.log("Conexão realizada com sucesso");
-    }).catch((err) => {
-        console.log("Erro ao conectar:" + err)
-    })
-}
-
-testar_conexao();
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 module.exports = prisma;
